@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Love Calculator ❤️</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            color: white;
+            padding-top: 80px;
+        }
+
+        .box {
+            background: white;
+            color: #333;
+            width: 320px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #ff4d6d;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        button {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #e63956;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>❤️ Love Calculator ❤️</h1>
+
+    <input id="name1" placeholder="Your Name">
+    <input id="name2" placeholder="Partner Name">
+
+    <button onclick="calculateLove()">Calculate</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function calculateLove() {
+    let name1 = document.getElementById("name1").value;
+    let name2 = document.getElementById("name2").value;
+
+    if(name1 === "" || name2 === "") {
+        document.getElementById("result").innerHTML = "Please enter both names ❤️";
+        return;
+    }
+
+    let combined = name1.toLowerCase() + name2.toLowerCase();
+    let score = 0;
+
+    for(let i = 0; i < combined.length; i++) {
+        score += combined.charCodeAt(i);
+    }
+
+    score = score % 101;
+
+    document.getElementById("result").innerHTML =
+    name1 + " ❤️ " + name2 + "<br>Love Score: " + score + "%";
+}
+</script>
+
+</body>
+</html>
