@@ -1,97 +1,44 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Love Calculator ❤️</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: linear-gradient(135deg, #ff758c, #ff7eb3);
-            color: white;
-            padding-top: 80px;
-        }
-
-        .box {
-            background: white;
-            color: #333;
-            width: 320px;
-            margin: auto;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
-        }
-
-        h1 {
-            color: #ff4d6d;
-        }
-
-        input {
-            width: 90%;
-            padding: 12px;
-            margin: 10px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-
-        button {
-            background: #ff4d6d;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #e63956;
-        }
-
-        #result {
-            margin-top: 20px;
-            font-size: 22px;
-            font-weight: bold;
-        }
-    </style>
-</head>
-
-<body>
-
-<div class="box">
-    <h1>❤️ Love Calculator ❤️</h1>
-
-    <input id="name1" placeholder="Your Name">
-    <input id="name2" placeholder="Partner Name">
-
-    <button onclick="calculateLove()">Calculate</button>
-
-    <div id="result"></div>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Love Calculator</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#ff6b9d,#ff9ec4);display:flex;justify-content:center;align-items:center;min-height:100vh;overflow:hidden}
+.heart{position:fixed;color:#fff8;animation:float 8s linear infinite}
+@keyframes float{from{transform:translateY(110vh)}to{transform:translateY(-10vh)}}
+.card{background:#ffffff22;backdrop-filter:blur(12px);padding:24px;border-radius:20px;width:min(92vw,360px);text-align:center;color:#fff;box-shadow:0 10px 30px #0003}
+.hidden{display:none}
+input,button{width:100%;padding:12px;margin:8px 0;border:none;border-radius:10px;font-size:16px}
+button{background:#ff2f6d;color:#fff;font-weight:bold}
+#footer{margin-top:15px;font-size:13px;opacity:.9}
+#score{font-size:48px;font-weight:bold}
+</style></head><body>
+<div class="card" id="welcome"><h1>❤️ Love Calculator</h1><p>Find your love score.</p><button onclick="start()">Start ❤️</button><div id="footer">Created by <b>Khalid-albaloshi</b></div></div>
+<div class="card hidden" id="form">
+<h2>Enter Names</h2>
+<input id="n1" placeholder="Your Name">
+<input id="n2" placeholder="Partner Name">
+<button onclick="calc()">Calculate ❤️</button>
 </div>
-
+<div class="card hidden" id="result">
+<div id="loading">Calculating... ❤️</div>
+<div id="done" class="hidden">
+<div id="score">0%</div>
+<p id="msg"></p>
+<button onclick="location.reload()">Try Again</button>
+<div id="footer">Created by <b>Khalid-albaloshi</b></div>
+</div>
+</div>
 <script>
-function calculateLove() {
-    let name1 = document.getElementById("name1").value;
-    let name2 = document.getElementById("name2").value;
-
-    if(name1 === "" || name2 === "") {
-        document.getElementById("result").innerHTML = "Please enter both names ❤️";
-        return;
-    }
-
-    let combined = name1.toLowerCase() + name2.toLowerCase();
-    let score = 0;
-
-    for(let i = 0; i < combined.length; i++) {
-        score += combined.charCodeAt(i);
-    }
-
-    score = score % 101;
-
-    document.getElementById("result").innerHTML =
-    name1 + " ❤️ " + name2 + "<br>Love Score: " + score + "%";
+for(let i=0;i<25;i++){let h=document.createElement('div');h.className='heart';h.innerHTML='❤';h.style.left=Math.random()*100+'vw';h.style.animationDuration=(5+Math.random()*6)+'s';h.style.fontSize=(12+Math.random()*20)+'px';document.body.appendChild(h);}
+function start(){welcome.classList.add('hidden');form.classList.remove('hidden');}
+function calc(){
+let a=n1.value.trim(),b=n2.value.trim();
+if(!a||!b){alert("Enter both names.");return;}
+form.classList.add('hidden');result.classList.remove('hidden');
+setTimeout(()=>{
+loading.classList.add('hidden');done.classList.remove('hidden');
+let s=0,target=[...a+b].reduce((x,c)=>x+c.charCodeAt(0),0)%101;
+let t=setInterval(()=>{score.innerText=s+'%';if(s>=target){clearInterval(t);msg.innerText=target>80?"Perfect Match! 💖":target>60?"Great Couple! ❤️":target>40?"There's Potential 😊":"Friendship is beautiful too 🌹";}s++;},20);
+},1800);
 }
-</script>
-
-</body>
-</html>
+</script></body></html>
